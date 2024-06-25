@@ -62,10 +62,10 @@ class SplashScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     CustomOutlineButton(
                         child: "TALK TO *LOVEGURU* AI".beautify(
-                          boldStyle: TStyle.gilroySemiBold.body2.colour(AppColors.primaryColor),
+                          boldStyle: TStyle.gilroySemiBold.body3.colour(AppColors.primaryColor),
                         ),
                         onPressed: () {
-                          AppRouter.router.go('/name');
+                          AppRouter.router.go('/guru');
                         })
                   ],
                 ),

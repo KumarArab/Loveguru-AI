@@ -17,7 +17,7 @@ class GuruDetailsScreen extends StatelessWidget {
           child: GlobalMargin(
         child: Column(
           children: [
-           const  GoogleBannerAdSpaceWidget(),
+          //  const  GoogleBannerAdSpaceWidget(),
             Expanded(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +28,7 @@ class GuruDetailsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.grey,
-                      image: DecorationImage(image: NetworkImage(GuruProvider.gurus[0].dpUrl), fit: BoxFit.cover),),
+                      image: DecorationImage(image: AssetImage(GuruProvider.gurus[0].dpUrl), fit: BoxFit.cover),),
                   height: 100,
                   width: 100,
                 ), 

@@ -9,7 +9,7 @@ class GlobalMargin extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
 width: double.maxFinite,
-      padding: const EdgeInsets.fromLTRB(24, kIsWeb ? 24 : 0, 24, kIsWeb ? 24 : 0),
+      padding: const EdgeInsets.fromLTRB(20, kIsWeb ? 24 : 0, 20, kIsWeb ? 24 : 0),
       child: child,
     );
   }

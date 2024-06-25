@@ -55,7 +55,7 @@ class _NameScreenState extends State<NameScreen> {
           child: GlobalMargin(
         child: Column(
           children: [
-            const GoogleBannerAdSpaceWidget(),
+            // const GoogleBannerAdSpaceWidget(),
             Expanded(
                 child: SizedBox(
               width: double.maxFinite,

@@ -17,7 +17,7 @@ class AIGuruChoiceScreen extends StatelessWidget {
         child: GlobalMargin(
             child: Column(
           children: [
-            const GoogleBannerAdSpaceWidget(),
+            // const GoogleBannerAdSpaceWidget(),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -61,8 +61,7 @@ class AIGuruChoiceScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.grey,
-                                image: DecorationImage(
-                                    image: NetworkImage(GuruProvider.gurus[i].dpUrl), fit: BoxFit.cover)),
+                                image: DecorationImage(image: NetworkImage(GuruProvider.gurus[i].dpUrl), fit: BoxFit.cover)),
                             height: 80,
                             width: 80,
                           ),
@@ -77,8 +76,7 @@ class AIGuruChoiceScreen extends StatelessWidget {
                                 GuruProvider.gurus[i].name,
                                 style: TStyle.gilroyBold.body1,
                               ),
-                              Text("Rating: ${GuruProvider.gurus[i].rating}",
-                                  style: TStyle.gilroyMedium.body4.colour(AppColors.primaryColor)),
+                              Text("Rating: ${GuruProvider.gurus[i].rating}", style: TStyle.gilroyMedium.body4.colour(AppColors.primaryColor)),
                               const SizedBox(height: 10),
                               Text(
                                 GuruProvider.gurus[i].desc,

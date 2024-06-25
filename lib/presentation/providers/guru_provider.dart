@@ -1,4 +1,5 @@
 import 'package:loveguru_ai/core/models/guru_model.dart';
+import 'package:loveguru_ai/utils/assets.dart';
 
 class GuruProvider {
   static String username = "User";
@@ -6,11 +7,11 @@ class GuruProvider {
   static GuruProfileModel selectedGuru = gurus[0];
   static List<GuruProfileModel> gurus = [
     GuruProfileModel(
-        name: "Aarohi Meta",
+        name: "Anvika Ekaterina",
         rating: 4.5,
-        dpUrl: "https://cdn.pixabay.com/photo/2023/09/27/05/07/ai-generated-8278631_1280.jpg",
+        dpUrl: Assets.loveguru,
         desc:
-            "Aarohi believes that art and music are important tools for unlocking our imagination and creativity, travel is a way to broaden horizons and enrich life, yoga is a way to maintain physical and mental health, and food is a bridge to understanding and appreciating different cultures. She firmly believes that every child is a potential little artist, and it is our responsibility to help them discover and showcase their talents."),
+            "Anvika believes that art and music are important tools for unlocking our imagination and creativity, travel is a way to broaden horizons and enrich life, yoga is a way to maintain physical and mental health, and food is a bridge to understanding and appreciating different cultures. She firmly believes that every child is a potential little artist, and it is our responsibility to help them discover and showcase their talents."),
     GuruProfileModel(
         name: "Salman Khan",
         rating: 4.5,

@@ -51,15 +51,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    chatRepo.initialSetup().then((val) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-        showTyping = true;
-       
-        await chatRepo.getRunStatus();
-        showTyping = false;
-        isLoading = false;
-      });
-    });
+    //   chatRepo.initialSetup().then((val) {
+    //     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //       showTyping = true;
+
+    //       // await chatRepo.getRunStatus();
+    //       showTyping = false;
+    //       isLoading = false;
+    //     });
+    //   });
 
     super.initState();
   }
@@ -73,29 +73,31 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   makePostRequest(BuildContext context) async {
-    setState(() {
-      showTyping = true;
-    });
+    // setState(() {
+    //   showTyping = true;
+    // });
 
-    try {
-      await chatRepo.addMessageToThread(textEditingController.text);
-       await chatRepo.createARun();
-      await chatRepo.getRunStatus();
-      await Future.delayed(Duration(seconds: 2), () async {
-        await chatRepo.getRunStatus();
-      });
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.black,
-        content: Text(
-          "Something went wrong!!, please try again.",
-          style: TStyle.gilroyMedium.body3.colour(Colors.white),
-        ),
-      ));
-    }
-    setState(() {
-      showTyping = false;
-    });
+    // try {
+    //   await chatRepo.addMessageToThread(textEditingController.text);
+    //   await chatRepo.createARun();
+    //   await chatRepo.getRunStatus();
+    //   await Future.delayed(Duration(seconds: 2), () async {
+    //     await chatRepo.getRunStatus();
+    //   });
+    // } catch (e) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     backgroundColor: Colors.black,
+    //     content: Text(
+    //       "Something went wrong!!, please try again.",
+    //       style: TStyle.gilroyMedium.body3.colour(Colors.white),
+    //     ),
+    //   ));
+    // }
+    // setState(() {
+    //   showTyping = false;
+    // });
+    ChatProvider.chats
+        .add(ChatModel(id: "dfdsf", timestamp: TimestampModel.currentTimeStamp(), owner: ChatOwner.user, message: textEditingController.text));
   }
 
   @override
@@ -105,43 +107,43 @@ class _ChatScreenState extends State<ChatScreen> {
         child: GlobalMargin(
           child: Column(
             children: [
-              const GoogleBannerAdSpaceWidget(),
+              // const GoogleBannerAdSpaceWidget(),
               Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: Row(children: [
-                  IconButton(onPressed: () => AppRouter.router.pop(), icon: const Icon(Icons.arrow_back)),
-                  const SizedBox(width: 16),
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey,
-                      image: DecorationImage(
-                        image: NetworkImage(GuruProvider.gurus[0].dpUrl),
-                        fit: BoxFit.cover,
-                      ),
+                padding: const EdgeInsets.only(top: 8, bottom: 4),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage(GuruProvider.gurus[0].dpUrl),
+                      radius: 20,
                     ),
-                    height: 40,
-                    width: 40,
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    GuruProvider.gurus[0].name,
-                    style: TStyle.gilroySemiBold.body0,
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () async {
-                      showTyping = true;
-                      await chatRepo.getRunStatus();
-                      showTyping = false;
-                    },
-                    icon: const Icon(Icons.refresh),
-                    color: AppColors.primaryColor,
-                  )
-                ]),
+                    const SizedBox(width: 16),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          GuruProvider.gurus[0].name,
+                          style: TStyle.gilroySemiBold.body0,
+                        ),
+                        Text(
+                          "Offline",
+                          style: TStyle.gilroyBold.body4.colour(AppColors.primaryColor),
+                        )
+                      ],
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      icon: const Icon(Icons.exit_to_app, color: AppColors.primaryColor),
+                      onPressed: () {
+                        AppRouter.router.go('/');
+                      },
+                    )
+                  ],
+                ),
               ),
               const Divider(
-                color: Colors.black26,
+                color: Colors.black12,
               ),
               Expanded(
                 child: ListView.builder(
@@ -189,16 +191,15 @@ class _ChatScreenState extends State<ChatScreen> {
                       width: 50,
                       margin: const EdgeInsets.only(top: 12),
                       child: Lottie.asset(Assets.typing, fit: BoxFit.contain))),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: const Color(0xffF8F8F8),
-                ),
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.only(top: 16),
-                child: Row(
-                  children: [
-                    Expanded(
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: const Color(0xffF8F8F8),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: TextFormField(
                         controller: textEditingController,
                         style: TStyle.gilroyRegular.body3,
@@ -219,45 +220,45 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    SizedBox(
-                      height: 50,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          // minimumSize: const Size.fromHeight(40),
-                          // maximumSize: const Size.fromWidth(double.maxFinite),
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          backgroundColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                  ),
+                  const SizedBox(width: 8),
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        // minimumSize: const Size.fromHeight(40),
+                        // maximumSize: const Size.fromWidth(double.maxFinite),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        backgroundColor: AppColors.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        onPressed: () {
-                          if (textEditingController.text.isNotEmpty) {
-                            setState(() {
-                              makePostRequest(context);
-                              textEditingController.text = "";
-                            });
-                          }
-                        },
-                        label: Text(
-                          "Send  ",
-                          style: TStyle.gilroyMedium.body2.colour(Colors.white),
-                        ),
-                        icon: Transform.translate(
-                          offset: const Offset(8, -3),
-                          child: Transform.rotate(
-                            angle: math.pi / -4,
-                            child: const Icon(
-                              Icons.send,
-                              color: Colors.white,
-                            ),
+                      ),
+                      onPressed: () {
+                        if (textEditingController.text.isNotEmpty) {
+                          setState(() {
+                            makePostRequest(context);
+                            textEditingController.text = "";
+                          });
+                        }
+                      },
+                      label: Text(
+                        "",
+                        style: TStyle.gilroyMedium.body2.colour(Colors.white),
+                      ),
+                      icon: Transform.translate(
+                        offset: const Offset(8, -3),
+                        child: Transform.rotate(
+                          angle: math.pi / -4,
+                          child: const Icon(
+                            Icons.send,
+                            color: Colors.white,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),

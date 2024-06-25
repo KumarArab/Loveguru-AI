@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:loveguru_ai/presentation/providers/guru_provider.dart';
 import 'package:loveguru_ai/utils/app_exceptions.dart';
 
 class ApiService {
